@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('employees.index', ['employees' => Employee::orderBy('surname')->get()]);
     }
 
     /**
@@ -24,7 +24,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $projects = \App\Models\Project::orderBy('title')->get();
+        return view('employees.create', ['projects' => $projects]);
     }
 
     /**
@@ -35,7 +36,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employee();
+        // can be used for seeing the insides of the incoming request
+        // var_dump($request->all()); die();
+        $employee->fill($request->all());
+        $employee->save();
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -57,7 +63,8 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        $projects = \App\Models\Project::orderBy('title')->get();
+        return view('employees.edit', ['employee' => $employee, 'projects' => $projects]);
     }
 
     /**
@@ -69,7 +76,9 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $employee->fill($request->all());
+        $employee->save();
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -80,6 +89,7 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->route('employee.index');
     }
 }
