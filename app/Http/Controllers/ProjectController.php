@@ -76,7 +76,7 @@ class ProjectController extends Controller
     {
         $project->fill($request->all());
         $project->save();
-        return redirect()->route('projects.index');
+        return redirect()->route('project.index');
     }
 
     /**

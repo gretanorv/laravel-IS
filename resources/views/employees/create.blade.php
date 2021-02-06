@@ -14,12 +14,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Pavardė: </label>
-                                <input type="number" name="surname" class="form-control">
+                                <input type="text" name="surname" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Projektas: </label>
                                 <select name="project_id" id="" class="form-control">
-                                    <option value="" selected disabled>Pasirinkite šalį</option>
+                                    <option value="" selected disabled>Pasirinkite projektą</option>
                                     @foreach ($projects as $project)
                                         <option value="{{ $project->id }}">{{ $project->title }}</option>
                                     @endforeach
