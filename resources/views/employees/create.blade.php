@@ -10,15 +10,15 @@
                             @csrf
                             <div class="form-group">
                                 <label for="">Vardas: </label>
-                                <input type="text" name="name" class="form-control">
+                                <input type="text" name="name" id="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="">Pavardė: </label>
-                                <input type="text" name="surname" class="form-control">
+                                <input type="text" name="surname" id="surname" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Projektas: </label>
-                                <select name="project_id" id="" class="form-control">
+                                <select name="project_id" id="project_id" class="form-control">
                                     <option value="" selected disabled>Pasirinkite projektą</option>
                                     @foreach ($projects as $project)
                                         <option value="{{ $project->id }}">{{ $project->title }}</option>
@@ -26,6 +26,15 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            @error('surname')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            @error('project_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </form>
                     </div>
                 </div>
