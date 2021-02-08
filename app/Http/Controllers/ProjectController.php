@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
     public function index()
     {
-        return view('projects.index', ['projects' => Project::orderBy('title')->get()]);
+        $projects = DB::table('projects')
+            ->leftJoin('employees', 'projects.id', '=', 'employees.project_id')
+            ->select('projects.id', 'projects.title', 'projects.description', 'employees.name', 'employees.surname')
+            ->get();
+        return view('projects.index', ['projects' => $projects]);
     }
 
     public function create()
