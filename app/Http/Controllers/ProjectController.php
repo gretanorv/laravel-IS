@@ -52,11 +52,6 @@ class ProjectController extends Controller
         $project->fill($request->all());
         $project->save();
         return redirect()->route('project.index');
-        // $project->title = $request['title'];
-        // $project->description = $request['description'];
-        // return ($project->save() !== 1) ?
-        //     redirect('/project/' . $id)->with('status_success', 'Post updated!') :
-        //     redirect('/project/' . $id)->with('status_error', 'Post was not updated!');
     }
 
     public function destroy(Project $project)
