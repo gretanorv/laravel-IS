@@ -10944,4 +10944,14 @@ a.text-dark:focus {
   }
 }
 
+.max-width {
+  max-width: 300px;
+}
+
+.error {
+  color: red;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
 

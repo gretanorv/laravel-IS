@@ -10,7 +10,8 @@
                             @csrf @method("PUT")
                             <div class="form-group">
                                 <label for="">Pavadinimas</label>
-                                <input type="text" name="title" class="form-control" value="{{ $project->title }}">
+                                <input type="text" name="title" id="title" class="form-control"
+                                    value="{{ $project->title }}">
                             </div>
                             <div class="form-group">
                                 <label for="">Aprašas</label>
@@ -18,6 +19,9 @@
                                     class="form-control">{{ $project->description }}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Pakeisti</button>
+                            @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </form>
                     </div>
                 </div>

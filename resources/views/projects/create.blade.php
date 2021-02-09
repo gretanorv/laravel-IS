@@ -10,13 +10,16 @@
                             @csrf
                             <div class="form-group">
                                 <label>Pavadinimas: </label>
-                                <input type="text" name="title" class="form-control">
+                                <input type="text" name="title" id="title" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Aprašymas: </label>
                                 <textarea id="mce" name="description" rows=10 cols=100 class="form-control"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </form>
                     </div>
                 </div>
