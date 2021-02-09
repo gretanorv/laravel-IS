@@ -61,6 +61,10 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
+        if (count($project->employees)) {
+            return back()->withErrors(['error' => ['Negalima ištrinti pojekto su priskirtais darbuotojais!']]);
+        }
+
         $project->delete();
         return redirect()->route('project.index');
     }

@@ -30,5 +30,8 @@
         <div>
             <a href="{{ route('project.create') }}" class="btn btn-success">Pridėti</a>
         </div>
+        @if ($errors->any())
+            <h4 style="color: red">{{ $errors->first() }}</h4>
+        @endif
     </div>
 @endsection
