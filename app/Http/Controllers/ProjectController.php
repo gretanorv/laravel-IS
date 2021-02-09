@@ -12,7 +12,8 @@ class ProjectController extends Controller
     {
         $projects = DB::table('projects')
             ->leftJoin('employees', 'projects.id', '=', 'employees.project_id')
-            ->select('projects.id', 'projects.title', 'projects.description', 'employees.name', 'employees.surname')
+            ->select('projects.id', 'projects.title', 'projects.description', DB::raw('group_concat(" ", employees.name, " ", employees.surname) as names'))
+            ->groupBy('projects.id')
             ->get();
         return view('projects.index', ['projects' => $projects]);
     }
@@ -44,15 +45,18 @@ class ProjectController extends Controller
     public function update($id, Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|unique:projects,title,' . $id . ',id|max:5',
+            'title' => 'required|unique:projects,title,' . $id . ',id',
         ]);
 
         $project = \App\Models\Project::find($id);
-        $project->title = $request['title'];
-        $project->text = $request['text'];
-        return ($project->save() !== 1) ?
-            redirect('/posts/' . $id)->with('status_success', 'Post updated!') :
-            redirect('/posts/' . $id)->with('status_error', 'Post was not updated!');
+        $project->fill($request->all());
+        $project->save();
+        return redirect()->route('project.index');
+        // $project->title = $request['title'];
+        // $project->description = $request['description'];
+        // return ($project->save() !== 1) ?
+        //     redirect('/project/' . $id)->with('status_success', 'Post updated!') :
+        //     redirect('/project/' . $id)->with('status_error', 'Post was not updated!');
     }
 
     public function destroy(Project $project)

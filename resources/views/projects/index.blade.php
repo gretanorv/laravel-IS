@@ -16,7 +16,7 @@
                     <td>{{ $project->id }}</td>
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->description }}</td>
-                    <td>{{ $project->name }} {{ $project->surname }}</td>
+                    <td>{{ $project->names }}</td>
                     <td>
                         <form action={{ route('project.destroy', $project->id) }} method="POST">
                             <a class="btn btn-success" href={{ route('project.edit', $project->id) }}>Redaguoti</a>

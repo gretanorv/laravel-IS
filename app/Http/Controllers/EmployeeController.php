@@ -41,17 +41,15 @@ class EmployeeController extends Controller
     public function update($id, Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:employees,name,' . $id . ',id|max:5',
+            'name' => 'required:employees,name,' . $id . ',id',
             'surname' => 'required',
             'project_id' => 'required',
         ]);
 
         $employee = \App\Models\Employee::find($id);
-        $employee->title = $request['title'];
-        $employee->text = $request['text'];
-        return ($employee->save() !== 1) ?
-            redirect('/posts/' . $id)->with('status_success', 'Post updated!') :
-            redirect('/posts/' . $id)->with('status_error', 'Post was not updated!');
+        $employee->fill($request->all());
+        $employee->save();
+        return redirect()->route('employee.index');
     }
 
     public function destroy(Employee $employee)

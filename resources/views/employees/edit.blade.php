@@ -19,7 +19,7 @@
                                     value="{{ $employee->surname }}">
                             </div>
                             <div class="form-group">
-                                <label>Šalis: </label>
+                                <label>Projektas: </label>
                                 <select name="project_id" id="project_id" class="form-control">
                                     @foreach ($projects as $project)
                                         <option value="{{ $project->id }}" @if ($project->id == $employee->project_id) selected="selected" @endif>
