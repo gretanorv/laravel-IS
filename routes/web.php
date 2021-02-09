@@ -12,3 +12,10 @@ Route::middleware(['auth'])->group(function () {
 
 Auth::routes(['register' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/switchlanguage/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'lt'])) abort(400);
+    session(['locale' => $locale]);
+    app()->setLocale($locale);
+    return redirect()->back();
+});
